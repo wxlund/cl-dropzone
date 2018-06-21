@@ -1,0 +1,83 @@
+---
+applications:
+  - name: rabbitmq-perf-test
+    path: target/pcf-perf-test-1.0-SNAPSHOT.jar
+    buildpack: java_buildpack
+#    buildpack: https://github.com/cloudfoundry/java-buildpack.git
+    memory: 768M
+    health-check-type: process
+    services:
+        - rmq
+
+    env:
+      AUTO_ACK: true
+      AUTO_DELETE: false
+      CONSUMERS: 2
+      METRICS_SAMPLING_INTERVAL: 60
+      MSG_SIZE: 1000
+      PRODUCERS: 1
+      QUEUE_PATTERN: 'perf-test-%3d'
+      QUEUE_PATTERN_FROM: 1
+      QUEUE_PATTERN_TO: 2
+      QUEUE_ARGS: "x-max-length=250000"
+      JBP_CONFIG_JAVA_MAIN: >
+          { arguments: "-x 1 -y 2 -s 1000 --queue-pattern-from 1 --queue-pattern-to 2"}
+
+#      AUTOACK:
+#      AUTO_DELETE:
+#      BODY:
+#      BODY_CONTENT_TYPE:
+#      CMESSAGES:
+#      CONFIRM:
+#      CONFIRM_TIMEOUT:
+#      CONSUMERS:
+#      CONSUMER_CHANNEL_COUNT:
+#      CONSUMER_LATENCY:
+#      CONSUMER_RATE:
+#      CTXSIZE:
+#      EXCHANGE:
+#      EXCLUSIVE:
+#      FLAG:
+#      FRAMEMAX:
+#      GLOBAL_QOS:
+#      HEARTBEAT:
+#      HEARTBEAT_SENDER_THREADS:
+#      ID:
+#      INTERVAL:
+#      LEGACY_METRICS:
+#      MESSAGE_PROPERTIES:
+#      METRICS_PROMETHEUS_ENDPOINT:
+#      METRICS_PROMETHEUS_PORT:
+#      METRICS_TAGS:
+#      MULTI_ACK_EVERY:
+#      NIO_THREADS:
+#      NIO_THREAD_POOL:
+#      OUTPUT_FILE:
+#      PMESSAGES:
+#      PREDECLARED:
+#      PRODUCERS:
+#      PRODUCER_CHANNEL_COUNT:
+#      PRODUCER_RANDOM_START_DELAY:
+#      PRODUCER_SCHEDULER_THREADS:
+#      PTXSIZE:
+#      PUBLISHING_INTERVAL:
+#      QOS:
+#      QUEUE:
+#      QUEUE_ARGS:
+#      QUEUE_PATTERN:
+#      QUEUE_PATTERN_FROM:
+#      QUEUE_PATTERN_TO:
+#      RANDOM_ROUTING_KEY:
+#      RATE:
+#      ROUTING_KEY:
+#      ROUTING_KEY_CACHE_SIZE:
+#      SASL_EXTERNAL:
+#      SIZE:
+#      SKIP_BINDING_QUEUES:
+#      SLOW_START:
+#      TIME:
+#      TYPE:
+#      URI:
+#      URIS:
+#      USE_DEFAULT_SSL_CONTEXT:
+#      USE_MILLIS:
